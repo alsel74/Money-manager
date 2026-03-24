@@ -7,18 +7,48 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Money Manager">
 <meta name="theme-color" content="#1c1c1e">
-<title>Money Manager BA</title>
+<title>Money Manager BA v3.1</title>
 
 <style>
 :root{--bg:#1c1c1e;--bg2:#2c2c2e;--bg3:#3a3a3c;--sur:#242426;--bor:#38383a;--txt:#fff;--mut:#8e8e93;--acc:#ff6b5b;--acd:rgba(255,107,91,.15);--grn:#32d74b;--red:#ff453a;--blu:#0a84ff;--ylw:#ffd60a;--r:12px;}
+body.light{--bg:#f2f2f7;--bg2:#ffffff;--bg3:#e5e5ea;--sur:#ffffff;--bor:#c6c6c8;--txt:#000000;--mut:#6e6e73;--acd:rgba(255,107,91,.12);}
+body.light #pw{background:#f2f2f7;}
+body.light #tb{background:#f2f2f7;border-bottom-color:#c6c6c8;}
+body.light #bn{background:#f2f2f7;border-top-color:#c6c6c8;}
+body.light .acs{background:#f2f2f7;}
+body.light .sh{background:#f2f2f7;}
+body.light .ov{background:rgba(0,0,0,.5);}
+body.light #ls{background:#f2f2f7;}
+body.light .cb{background:#ffffff;}
+body.light .cov{background:rgba(0,0,0,.5);}
+body.light .smbox{background:#ffffff;border-color:#c6c6c8;}
+body.light .acic[style*="#60a5fa22"]{background:#e0f0ff !important;}
+body.light .acic[style*="#34d39922"]{background:#d1f7e0 !important;}
+body.light .dg{background:#f2f2f7;border-bottom-color:#c6c6c8;}
+body.light .db{background:#e5e5ea;color:#6e6e73;}
+body.light .tr{border-bottom-color:#e5e5ea;}
+body.light .tr:active{background:#e5e5ea;}
+body.light .sr:active{background:#e5e5ea;}
+body.light .mmr:active{background:#e5e5ea;}
+body.light .nc{background:#ffffff;border-color:#c6c6c8;}
+body.light .nc:active{background:#f2f2f7;}
+body.light .cgb{background:#f2f2f7;border-color:#c6c6c8;}
+body.light .cgb.on{background:rgba(255,107,91,.1);}
+body.light .npb{background:#e5e5ea;}
+body.light .npb:active{background:#d1d1d6;}
+body.light .fi{background:#f2f2f7;border-color:#c6c6c8;color:#000;}
+body.light .svb{color:#fff;}
+body.light .pb{background:#e5e5ea;}
+body.light #toast{background:#3a3a3c;color:#fff;}
+body.light .budbar{background:#e5e5ea;}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-html,body{height:100%;overflow:hidden;background:var(--bg);}
+html,body{height:100%;overflow:hidden;background:var(--bg);transition:background .2s,color .2s;}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--txt);max-width:430px;margin:0 auto;display:flex;flex-direction:column;height:100vh;}
-#pw{flex:1;overflow-y:auto;overflow-x:hidden;padding-bottom:80px;}
+#pw{flex:1;overflow-y:auto;overflow-x:hidden;padding-bottom:100px;background:var(--bg);}
 #pw::-webkit-scrollbar{display:none;}
 
 /* LOCK */
-#ls{position:fixed;inset:0;background:var(--bg);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .3s;}
+#ls{position:fixed;inset:0;background:var(--bg);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .3s,background .2s;}
 .pdots{display:flex;gap:14px;}
 .pd{width:15px;height:15px;border-radius:50%;border:2px solid var(--mut);transition:all .15s;}
 .pd.on{background:var(--acc);border-color:var(--acc);}
@@ -42,17 +72,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:va
 .tci{position:absolute;left:50%;transform:translateX(-50%);font-size:17px;font-weight:700;pointer-events:none;}
 
 /* BOTTOM NAV */
-#bn{background:var(--sur);border-top:1px solid var(--bor);display:flex;flex-shrink:0;padding:6px 0 8px;}
-.ni{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:4px 0;border:none;background:transparent;color:var(--mut);}
+#bn{background:var(--sur);border-top:1px solid var(--bor);display:flex;flex-shrink:0;padding:12px 0 16px;}
+.ni{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;padding:6px 0;border:none;background:transparent;color:var(--mut);}
 .ni.on{color:var(--acc);}
 .nico{font-size:20px;line-height:1;}
 .nlbl{font-size:10px;font-weight:500;}
 
 /* FAB */
-#fab{position:fixed;bottom:calc(68px);right:16px;display:flex;flex-direction:column;align-items:flex-end;gap:8px;z-index:50;}
-.fabm{width:52px;height:52px;border-radius:50%;background:var(--acc);border:none;color:#fff;font-size:26px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(255,107,91,.4);transition:transform .1s;}
+#fab{position:fixed;bottom:calc(90px);right:16px;display:flex;flex-direction:column;align-items:flex-end;gap:8px;z-index:50;}
+.fabm{width:58px;height:58px;border-radius:50%;background:var(--acc);border:none;color:#fff;font-size:30px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(255,107,91,.45);transition:transform .1s;}
 .fabm:active{transform:scale(.92);}
-.fabs{width:44px;height:44px;border-radius:50%;background:var(--bg2);border:none;color:var(--txt);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.4);}
+
 
 /* TABS */
 .ttabs{display:flex;border-bottom:1px solid var(--bor);overflow-x:auto;}
@@ -220,8 +250,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:va
 .typb.at{background:var(--blu);color:#fff;}
 
 /* AMOUNT */
-.abig{text-align:center;padding:6px 16px 14px;font-size:44px;font-weight:800;font-family:'Courier New',Courier,monospace;letter-spacing:-2px;}
-.abig .cur{font-size:26px;color:var(--mut);margin-right:4px;}
+.abig{text-align:center;padding:6px 16px 14px;font-size:44px;font-weight:800;letter-spacing:-2px;}
+.abig .cur{font-size:40px;color:var(--mut);margin-right:6px;font-weight:300;letter-spacing:0;}
 
 /* NUMPAD */
 .npg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:0 16px;margin-bottom:12px;}
@@ -286,6 +316,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:va
   <div style="font-size:56px">🔒</div>
   <div style="font-size:20px;font-weight:700">Money Manager BA</div>
   <div style="font-size:13px;color:var(--mut)">Unesi PIN kod</div>
+  <div style="font-size:10px;color:#555">v3.1</div>
   <div class="pdots"><div class="pd" id="pd0"></div><div class="pd" id="pd1"></div><div class="pd" id="pd2"></div><div class="pd" id="pd3"></div></div>
   <div class="lerr" id="lerr"></div>
   <div class="ppad">
@@ -336,7 +367,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:va
 
 <!-- FAB -->
 <div id="fab">
-  <button class="fabs" onclick="openAdd()" title="Kopiraj">📋</button>
   <button class="fabm" onclick="openAdd()">+</button>
 </div>
 
@@ -358,7 +388,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:va
       <button class="typb ae" id="tb-e" onclick="setTT('expense')">Rashod</button>
       <button class="typb" id="tb-t" onclick="setTT('transfer')">Prijenos</button>
     </div>
-    <div class="abig"><span class="cur">KM</span><span id="adisp">0</span></div>
+    <div class="abig"><span class="cur" id="cur-lbl">KM</span><span id="adisp">0</span></div>
     <div class="npg">
       <button class="npb" onclick="np('7')">7</button><button class="npb" onclick="np('8')">8</button><button class="npb" onclick="np('9')">9</button>
       <button class="npb" onclick="np('4')">4</button><button class="npb" onclick="np('5')">5</button><button class="npb" onclick="np('6')">6</button>
@@ -496,7 +526,7 @@ function ld(){
 var D=ld();
 function sd(){_set('mm3',D);}
 
-function lsec(){var s=_get('mm3sec');if(s)return s;return{pin:'1234',penabled:false,fid:false};}
+function lsec(){var s=_get('mm3sec');if(s)return s;return{pin:'1234',penabled:false,fid:false,theme:'auto',cur:'KM',accent:'#ff6b5b'};}
 var SEC=lsec();
 function ssec(){_set('mm3sec',SEC);}
 
@@ -733,7 +763,7 @@ function rendSummary(){
     '<div class="budbar"><div class="budfill" style="width:'+sp+'%;background:'+fc+'"></div><div style="position:absolute;top:0;bottom:0;left:'+tp+'%;width:2px;background:rgba(255,255,255,.5)"></div></div>'+
     '<div class="budlbl"><span>KM '+fm(tb)+'</span><span style="color:var(--blu);font-weight:700">'+sp.toFixed(0)+'%</span><span>KM '+fm(tb)+'</span></div>'+
     '</div>'+
-    '<div style="padding:12px 16px 16px"><button class="expbtn" onclick="doCSV()">\ud83d\udfe9 Izvezi podatke u Excel (CSV)</button></div>';
+    '<div style="padding:12px 16px"><button onclick="openBdgEdit()" style="background:none;border:none;color:var(--acc);font-size:13px;font-weight:700;cursor:pointer;padding:4px 0">⚙️ Uredi budzetne limite</button></div>'+'<div style="padding:0 16px 16px"><button class="expbtn" onclick="doCSV()">\ud83d\udfe9 Izvezi podatke u Excel (CSV)</button></div>';
 }
 
 // ===== NOTES =====
@@ -882,6 +912,8 @@ function rendBudget(){
 
 // ===== MORE =====
 function rendMore(){
+  var curs={KM:'KM (BAM)',EUR:'EUR (\u20ac)',USD:'USD ($)',HRK:'kn (HRK)'};
+  var themes={auto:'Auto',dark:'Tamni',light:'Svijetli'};
   return '<div style="padding:14px 16px 4px;display:flex;justify-content:space-between"><div style="font-size:20px;font-weight:800">Postavke</div><div style="font-size:12px;color:var(--mut)">v3.0</div></div>'+
     '<div class="sgh">Kategorije</div>'+
     '<div class="sr" onclick="openCatPage(\'income\')"><div class="srl"><span class="sic">\ud83d\udcb0</span><div><div class="slb">Kategorije prihoda</div></div></div><span class="chv">></span></div>'+
@@ -890,10 +922,11 @@ function rendMore(){
     '<div class="sr" onclick="openPinSetup()"><div class="srl"><span class="sic">\ud83d\udd12</span><div><div class="slb">PIN / Face ID</div><div class="ssb">'+(SEC.penabled?'PIN ukljucen':'PIN iskljucen')+'</div></div></div><span class="sbdg '+(SEC.penabled?'on':'off')+'">'+(SEC.penabled?'UKLJUCENO':'ISKLJUCENO')+'</span></div>'+
     '<div class="sgh">Podaci</div>'+
     '<div class="sr" onclick="openOv(\'ov-bak\')"><div class="srl"><span class="sic">\ud83d\udd04</span><div><div class="slb">Backup</div><div class="ssb">Export, Import, Reset</div></div></div><span class="chv">></span></div>'+
+    '<div class="sr" onclick="openBdgEdit()"><div class="srl"><span class="sic">\ud83c\udfaf</span><div><div class="slb">Postavke budzeta</div><div class="ssb">'+D.bdg.length+' kategorija</div></div></div><span class="chv">></span></div>'+
     '<div class="sgh">Opcije</div>'+
-    '<div class="sr"><div class="srl"><span class="sic">\ud83d\udcb1</span><div><div class="slb">Valuta</div><div class="ssb">BAM (KM)</div></div></div><span class="chv">></span></div>'+
+    '<div class="sr" onclick="openCurPicker()"><div class="srl"><span class="sic">\ud83d\udcb1</span><div><div class="slb">Valuta</div><div class="ssb">'+(curs[SEC.cur]||'KM (BAM)')+'</div></div></div><span class="chv">></span></div>'+
     '<div class="sr"><div class="srl"><span class="sic">\ud83c\udf0d</span><div><div class="slb">Jezik</div><div class="ssb">Bosanski</div></div></div><span class="chv">></span></div>'+
-    '<div class="sr"><div class="srl"><span class="sic">\ud83c\udfa8</span><div><div class="slb">Stil aplikacije</div></div></div><span class="chv">></span></div>';
+    '<div class="sr" onclick="openStylePicker()"><div class="srl"><span class="sic">\ud83c\udfa8</span><div><div class="slb">Stil aplikacije</div><div class="ssb">'+(themes[SEC.theme]||'Auto')+'</div></div></div><span class="chv">></span></div>';
 }
 
 // ===== ADD TX =====
@@ -995,12 +1028,108 @@ function addEL(){
 // ===== TOAST =====
 function toast(m){var el=document.getElementById('toast');el.textContent=m;el.className='on';setTimeout(function(){el.className='';},2400);}
 
+// ===== THEME / STYLE =====
+function applyTheme(){
+  var t=SEC.theme||'auto';
+  var body=document.body;
+  var isLight=false;
+  if(t==='light'){isLight=true;}
+  else if(t==='dark'){isLight=false;}
+  else{isLight=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches;}
+  body.className=isLight?'light':'';
+  // Force background on html too
+  document.documentElement.style.background=isLight?'#f2f2f7':'#1c1c1e';
+  // apply accent color
+  var acc=SEC.accent||'#ff6b5b';
+  document.documentElement.style.setProperty('--acc',acc);
+  document.documentElement.style.setProperty('--acd',acc+'26');
+  // update theme-color meta
+  var meta=document.querySelector('meta[name=theme-color]');
+  if(meta)meta.content=isLight?'#f2f2f7':'#1c1c1e';
+}
+function openStylePicker(){
+  var t=SEC.theme||'auto';
+  var auto=document.getElementById('thm-auto');
+  var dark=document.getElementById('thm-dark');
+  var light=document.getElementById('thm-light');
+  if(auto)auto.checked=(t==='auto');
+  if(dark)dark.checked=(t==='dark');
+  if(light)light.checked=(t==='light');
+  // mark active accent
+  var accents=['#ff6b5b','#ff453a','#f472b6','#32d74b','#0a84ff','#636366'];
+  for(var i=0;i<accents.length;i++){
+    var btn=document.getElementById('acc-'+i);
+    if(btn)btn.style.border='3px solid '+(SEC.accent===accents[i]?'var(--txt)':'transparent');
+  }
+  openOv('ov-style');
+}
+function setTheme(t){SEC.theme=t;ssec();applyTheme();rend();}
+function setAccent(col){SEC.accent=col;ssec();applyTheme();rend();}
+
+// ===== CURRENCY =====
+var CURSYM={KM:'KM',EUR:'EUR',USD:'$',HRK:'kn'};
+function getCur(){return SEC.cur||'KM';}
+function getCurSym(){return CURSYM[getCur()]||'KM';}
+function openCurPicker(){
+  var cur=getCur();
+  ['km','eur','usd','hrk'].forEach(function(k){var el=document.getElementById('cur-'+k);if(el)el.textContent='';});
+  var el=document.getElementById('cur-'+cur.toLowerCase());
+  if(el)el.textContent='✓';
+  openOv('ov-cur');
+}
+function setCur(sym,code){
+  SEC.cur=sym;ssec();
+  closeOv('ov-cur');
+  // Update KM display label everywhere
+  document.getElementById('adisp') && (document.getElementById('adisp').textContent=V.amt);
+  var curEl=document.querySelector('.cur');
+  if(curEl)curEl.textContent=getCurSym();
+  rend();
+  toast('Valuta promijenjena na '+sym);
+}
+
+// ===== BUDGET EDIT =====
+function openBdgEdit(){
+  rendBdgList();
+  // populate category select
+  var sel=document.getElementById('bdg-cat');
+  if(sel){
+    sel.innerHTML=D.ce.map(function(c){return '<option value="'+c.id+'">'+c.ico+' '+c.n+'</option>';}).join('');
+  }
+  openOv('ov-bdg');
+}
+function rendBdgList(){
+  var el=document.getElementById('bdg-list');
+  if(!el)return;
+  if(D.bdg.length===0){el.innerHTML='<div style="color:var(--mut);font-size:13px;padding:8px 0">Nema budzetnih kategorija.</div>';return;}
+  var h='';
+  D.bdg.forEach(function(b,i){
+    var cat=gcat(b.id,'expense');
+    h+='<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--bor)">'+
+      '<div style="display:flex;align-items:center;gap:8px"><span style="font-size:18px">'+cat.ico+'</span><div><div style="font-size:14px;font-weight:600">'+cat.n+'</div><div style="font-size:12px;color:var(--mut)">Limit: KM '+b.lim.toFixed(2)+'</div></div></div>'+
+      '<button onclick="rmBudget('+i+')" style="background:var(--red);border:none;border-radius:8px;color:#fff;font-size:12px;font-weight:700;padding:5px 10px;cursor:pointer">Obrisi</button>'+
+      '</div>';
+  });
+  el.innerHTML=h;
+}
+function addBudget(){
+  var catId=document.getElementById('bdg-cat').value;
+  var lim=parseFloat(document.getElementById('bdg-lim').value);
+  if(!catId||!lim||lim<=0){toast('Unesi kategoriju i limit!');return;}
+  // remove existing entry for this cat if any
+  D.bdg=D.bdg.filter(function(b){return b.id!==catId;});
+  D.bdg.push({id:catId,lim:lim});
+  sd();rendBdgList();document.getElementById('bdg-lim').value='';toast('Budzet dodan!');
+}
+function rmBudget(idx){D.bdg.splice(idx,1);sd();rendBdgList();toast('Budzet obrisan.');}
+
 // ===== COMPAT HELPERS =====
 function arrFind(arr,fn){for(var i=0;i<arr.length;i++){if(fn(arr[i]))return arr[i];}return null;}
 function arrIncludes(arr,v){for(var i=0;i<arr.length;i++){if(arr[i]===v)return true;}return false;}
 
 // ===== INIT =====
 try {
+  applyTheme();
   document.getElementById('n0l').textContent=fd(TODAY);
   updtb('home');
   rend();
@@ -1010,5 +1139,59 @@ try {
   var ls=document.getElementById('ls');if(ls)ls.style.display='none';
 }
 </script>
+<!-- STYLE OVERLAY -->
+<div class="ov" id="ov-style" onclick="ovOut(event,'ov-style')">
+  <div class="sh">
+    <div class="shh"></div>
+    <div class="sht">Stil aplikacije</div>
+    <div style="padding:0 16px 16px">
+      <div class="togr"><div style="display:flex;align-items:center;gap:12px"><span style="font-size:20px">🔄</span><span class="toglb">Auto (System)</span></div><input type="radio" name="thm" value="auto" id="thm-auto" style="width:20px;height:20px;accent-color:var(--acc)" onchange="setTheme('auto')"></div>
+      <div class="togr"><div style="display:flex;align-items:center;gap:12px"><span style="font-size:20px">🌙</span><span class="toglb">Tamni mod</span></div><input type="radio" name="thm" value="dark" id="thm-dark" style="width:20px;height:20px;accent-color:var(--acc)" onchange="setTheme('dark')"></div>
+      <div class="togr"><div style="display:flex;align-items:center;gap:12px"><span style="font-size:20px">☀️</span><span class="toglb">Svijetli mod</span></div><input type="radio" name="thm" value="light" id="thm-light" style="width:20px;height:20px;accent-color:var(--acc)" onchange="setTheme('light')"></div>
+      <div style="margin-top:16px;margin-bottom:8px;font-size:12px;font-weight:600;color:var(--mut);text-transform:uppercase;letter-spacing:.5px">Boja akcenta</div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <button onclick="setAccent('#ff6b5b')" style="width:44px;height:44px;border-radius:50%;background:#ff6b5b;border:3px solid transparent;cursor:pointer" id="acc-0"></button>
+        <button onclick="setAccent('#ff453a')" style="width:44px;height:44px;border-radius:50%;background:#ff453a;border:3px solid transparent;cursor:pointer" id="acc-1"></button>
+        <button onclick="setAccent('#f472b6')" style="width:44px;height:44px;border-radius:50%;background:#f472b6;border:3px solid transparent;cursor:pointer" id="acc-2"></button>
+        <button onclick="setAccent('#32d74b')" style="width:44px;height:44px;border-radius:50%;background:#32d74b;border:3px solid transparent;cursor:pointer" id="acc-3"></button>
+        <button onclick="setAccent('#0a84ff')" style="width:44px;height:44px;border-radius:50%;background:#0a84ff;border:3px solid transparent;cursor:pointer" id="acc-4"></button>
+        <button onclick="setAccent('#636366')" style="width:44px;height:44px;border-radius:50%;background:#636366;border:3px solid transparent;cursor:pointer" id="acc-5"></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CURRENCY OVERLAY -->
+<div class="ov" id="ov-cur" onclick="ovOut(event,'ov-cur')">
+  <div class="sh">
+    <div class="shh"></div>
+    <div class="sht">Valuta</div>
+    <div style="padding:0 0 8px">
+      <div class="sr" onclick="setCur('KM','BAM')"><div class="srl"><span class="sic">🇧🇦</span><div><div class="slb">Konvertibilna marka</div><div class="ssb">BAM (KM)</div></div></div><span id="cur-km" style="font-size:18px"></span></div>
+      <div class="sr" onclick="setCur('EUR','EUR')"><div class="srl"><span class="sic">🇪🇺</span><div><div class="slb">Euro</div><div class="ssb">EUR (€)</div></div></div><span id="cur-eur" style="font-size:18px"></span></div>
+      <div class="sr" onclick="setCur('USD','USD')"><div class="srl"><span class="sic">🇺🇸</span><div><div class="slb">Americki dolar</div><div class="ssb">USD ($)</div></div></div><span id="cur-usd" style="font-size:18px"></span></div>
+      <div class="sr" onclick="setCur('HRK','HRK')"><div class="srl"><span class="sic">🇭🇷</span><div><div class="slb">Hrvatska kuna</div><div class="ssb">HRK (kn)</div></div></div><span id="cur-hrk" style="font-size:18px"></span></div>
+    </div>
+  </div>
+</div>
+
+<!-- BUDGET EDIT OVERLAY -->
+<div class="ov" id="ov-bdg" onclick="ovOut(event,'ov-bdg')">
+  <div class="sh">
+    <div class="shh"></div>
+    <div class="sht">Postavke budžeta</div>
+    <div style="padding:0 16px 16px">
+      <div id="bdg-list"></div>
+      <div style="margin-top:14px">
+        <div class="fl" style="margin-bottom:6px">Kategorija</div>
+        <select class="fi" id="bdg-cat" style="margin-bottom:10px"></select>
+        <div class="fl" style="margin-bottom:6px">Mjsečni limit (KM)</div>
+        <input type="number" class="fi" id="bdg-lim" placeholder="npr. 200" style="margin-bottom:12px">
+        <button class="svb" style="width:100%;margin:0" onclick="addBudget()">Dodaj budžet</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
